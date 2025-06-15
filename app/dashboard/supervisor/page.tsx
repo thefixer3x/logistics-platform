@@ -1,4 +1,5 @@
 import { supabase } from '@/lib/supabase'
+import { type ReactNode } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -201,7 +202,7 @@ function StatsCard({
 }: {
   title: string
   value: number
-  icon: React.ReactNode
+  icon: ReactNode
   color: string
   change?: string
   urgent?: boolean
