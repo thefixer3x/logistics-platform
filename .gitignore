@@ -1,0 +1,34 @@
+# Node dependencies
+node_modules/
+
+# Next.js build output
+.next/
+out/
+
+# Production builds
+build/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env*
+
+# OS metadata
+.DS_Store
+
+# Coverage
+coverage/
+
+# IDE settings
+.vscode/
+.idea/
+
+# Static analysis
+*.log
+
+# Misc
+vercel/
+netlify/

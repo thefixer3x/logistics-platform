@@ -1,0 +1,41 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "18.17.0"
+  NPM_VERSION = "10.2.3"
+
+# Handle Next.js routes
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Define environment variables
+[template.environment]
+  NEXT_PUBLIC_SUPABASE_URL = "Supabase project URL"
+  NEXT_PUBLIC_SUPABASE_ANON_KEY = "Supabase anonymous key"
+  SUPABASE_SERVICE_ROLE_KEY = "Supabase service role key (keep secret)"
+  NEXT_PUBLIC_APP_URL = "Your app's URL (e.g., https://logistics.seftech.com)"
+  PAYSTACK_SECRET_KEY = "Paystack secret key"
+  FLUTTERWAVE_SECRET_KEY = "Flutterwave secret key"
+  PREMBLY_APP_ID = "Prembly application ID"
+  PREMBLY_X_API_KEY = "Prembly API key"
+
+# Set up serverless functions for API routes
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# Headers to improve security
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://*; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.paystack.co https://api.flutterwave.com https://api.prembly.com;"
+    
+# Performance optimization
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
