@@ -28,6 +28,9 @@ export const createServerSupabaseClient = () => {
   return createClient(supabaseUrl, supabaseAnonKey)
 }
 
+// Alias for createServerSupabaseClient to match import in route.ts
+export const createSupabaseServerClient = createServerSupabaseClient
+
 // Real-time subscriptions configuration
 export const realtimeConfig = {
   channels: {
