@@ -1,0 +1,31 @@
+# Supabase local project configuration. Safe to commit.
+# Secrets such as anon/service_role keys are loaded via env vars.
+
+[project]
+name = "logistics-platform"
+ref = "mxtsdgkwzjzlttpotole"
+
+[api]
+port = 54321
+url = "http://localhost:54321"
+
+[db]
+port = 54322
+
+[studio]
+enabled = false
+
+[auth]
+enabled = true
+site_url = "https://logistics-platform-thefixers-team.vercel.app"
+additional_redirect_urls = [
+  "http://localhost:3000",
+  "https://logistics-platform-thefixers-team.vercel.app/**",
+  "https://*.vercel.app",
+  "https://*.lovable.app/**"
+]
+jwt_expiry = 3600
+enable_refresh_token_rotation = true
+refresh_token_reuse_interval = 10
+
+# No secrets included below. Keys supplied via environment variables at runtime.
