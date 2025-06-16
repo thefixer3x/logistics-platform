@@ -14,25 +14,26 @@ const nextConfig = {
   },
 }
 
-// Temporarily disable Sentry to unblock builds
-// TODO: Configure Sentry project properly and re-enable
-module.exports = nextConfig
-
-// Sentry configuration (disabled)
-// const { withSentryConfig } = require("@sentry/nextjs");
-// module.exports = withSentryConfig(
-//   nextConfig,
-//   {
-//     silent: true,
-//     org: "seftech-hub",
-//     project: "logistics-platform",
-//   },
-//   {
-//     widenClientFileUpload: true,
-//     transpileClientSDK: true,
-//     tunnelRoute: "/monitoring",
-//     hideSourceMaps: true,
-//     disableLogger: true,
-//     automaticVercelMonitors: true,
-//   }
-// )
+// Conditionally enable Sentry only if auth token is available
+if (process.env.SENTRY_AUTH_TOKEN) {
+  const { withSentryConfig } = require("@sentry/nextjs");
+  
+  module.exports = withSentryConfig(
+    nextConfig,
+    {
+      silent: true,
+      org: "seftech-hub",
+      project: "logistics-platform",
+    },
+    {
+      widenClientFileUpload: true,
+      transpileClientSDK: true,
+      tunnelRoute: "/monitoring",
+      hideSourceMaps: true,
+      disableLogger: true,
+      automaticVercelMonitors: true,
+    }
+  )
+} else {
+  module.exports = nextConfig
+}
