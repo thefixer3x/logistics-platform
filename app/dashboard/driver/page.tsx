@@ -74,7 +74,7 @@ export default async function DriverDashboard() {
           >
             {profile?.status || 'inactive'}
           </Badge>
-          <EmergencyContact />
+          <EmergencyContact driverId={''} />
         </div>
       </div>
 

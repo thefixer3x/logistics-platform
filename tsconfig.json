@@ -23,7 +23,7 @@
       }
     ],
     "baseUrl": ".",
-    "types": ["node", "react"],
+    
     "paths": {
       "@/*": ["./*"]
     }
