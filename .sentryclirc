@@ -1,7 +1,0 @@
-[defaults]
-url=https://sentry.io/
-org=seftech-hub
-project=logistics-platform
-
-[auth]
-token=
