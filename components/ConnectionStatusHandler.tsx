@@ -19,9 +19,12 @@ export function ConnectionStatusHandler({
 }: ConnectionStatusHandlerProps) {
   const [isConnected, setIsConnected] = useState(true)
   const [isChecking, setIsChecking] = useState(false)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
   
   const checkConnection = async () => {
+    if (isChecking) return // Prevent multiple simultaneous checks
     setIsChecking(true)
+    setErrorMessage(null)
     try {
       // Use provided service check or default to Supabase connection check
       const connected = serviceCheck 
@@ -32,6 +35,7 @@ export function ConnectionStatusHandler({
     } catch (error) {
       console.error('Connection check failed:', error)
       setIsConnected(false)
+      setErrorMessage(getErrorMessage(error))
     } finally {
       setIsChecking(false)
     }
@@ -40,19 +44,63 @@ export function ConnectionStatusHandler({
   // Default Supabase connection check
   const checkSupabaseConnection = async (): Promise<boolean> => {
     try {
-      const { data, error } = await supabase.from('health_check').select('status').maybeSingle()
+      // First try the health check table
+      const { data: healthData, error: healthError } = await supabase
+        .from('health_check')
+        .select('status')
+        .maybeSingle()
       
-      // If table doesn't exist, try a simpler ping
-      if (error && error.code === '42P01') {
-        const { data, error } = await supabase.rpc('ping')
-        return !error
+      if (!healthError && healthData?.status === 'ok') {
+        return true
       }
+
+      // If health check fails, try a simple ping
+      const { data, error } = await supabase.rpc('ping')
+      if (!error) {
+        return true
+      }
+
+      // If both checks fail, try a basic query
+      const { error: queryError } = await supabase
+        .from('profiles')
+        .select('id')
+        .limit(1)
       
-      return !error
+      return !queryError
     } catch (e) {
       console.error('Supabase connection error:', e)
       return false
     }
+  }
+
+  const getErrorMessage = (error: any): string => {
+    if (!error) return 'Unknown connection error'
+    
+    // Network errors
+    if (error.message?.includes('network')) {
+      return 'Network connectivity issues. Please check your internet connection.'
+    }
+    
+    // Supabase specific errors
+    if (error.message?.includes('JWT')) {
+      return 'Authentication error. Please try logging in again.'
+    }
+    
+    if (error.message?.includes('timeout')) {
+      return 'Request timed out. The server might be busy.'
+    }
+    
+    // Database errors
+    if (error.code === '42P01') {
+      return 'Database table not found. Please contact support.'
+    }
+    
+    if (error.code === '23505') {
+      return 'Database constraint violation. Please try again.'
+    }
+    
+    // Default error message
+    return 'We\'re having trouble connecting to our services. Please try again later.'
   }
   
   useEffect(() => {
@@ -65,34 +113,32 @@ export function ConnectionStatusHandler({
     // Clean up on unmount
     return () => clearInterval(intervalId)
   }, [checkInterval])
-  
+
   if (!isConnected) {
     return (
-      <Card className="border-amber-200 my-4">
-        <CardHeader className="bg-amber-50 text-amber-800">
-          <CardTitle className="flex items-center gap-2 text-lg">
-            <WifiOff className="h-5 w-5" />
+      <Card className="w-full max-w-md mx-auto mt-8">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <WifiOff className="h-5 w-5 text-red-500" />
             Connection Error
           </CardTitle>
         </CardHeader>
-        <CardContent className="pt-4">
-          <p className="mb-4 text-gray-600">
-            We're having trouble connecting to our services. This could be due to:
+        <CardContent>
+          <p className="text-gray-600 mb-4">
+            {errorMessage || 'We\'re having trouble connecting to our services. This could be due to:'}
           </p>
-          <ul className="list-disc pl-5 mb-4 text-sm text-gray-600">
+          <ul className="list-disc list-inside text-gray-600 mb-4">
             <li>Network connectivity issues</li>
             <li>Server maintenance</li>
             <li>Database connection problems</li>
           </ul>
-          <div className="flex justify-end">
-            <RetryButton 
-              onRetry={checkConnection} 
-            />
-          </div>
+          <RetryButton 
+            onRetry={isChecking ? undefined : checkConnection}
+          />
         </CardContent>
       </Card>
     )
   }
-  
+
   return <>{children}</>
 }
