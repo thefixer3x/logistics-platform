@@ -33,3 +33,4 @@ coverage/
 vercel/
 netlify/
 .env
+.vercel

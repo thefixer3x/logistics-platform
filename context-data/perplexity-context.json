@@ -1,0 +1,17 @@
+{
+  "timestamp": "2025-06-21T10:34:06.210Z",
+  "data": {
+    "lastStarted": "2025-06-21T10:34:06.210Z",
+    "command": "npx -y server-perplexity-ask",
+    "config": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "server-perplexity-ask"
+      ],
+      "env": {
+        "PERPLEXITY_API_KEY": "YOUR_PERPLEXITY_API_KEY"
+      }
+    }
+  }
+}

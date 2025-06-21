@@ -1,0 +1,18 @@
+{
+  "timestamp": "2025-06-21T10:34:06.204Z",
+  "data": {
+    "lastStarted": "2025-06-21T10:34:06.198Z",
+    "command": "npx -y @stripe/mcp --tools=all",
+    "config": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@stripe/mcp",
+        "--tools=all"
+      ],
+      "env": {
+        "STRIPE_SECRET_KEY": "YOUR_STRIPE_KEY"
+      }
+    }
+  }
+}

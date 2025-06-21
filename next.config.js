@@ -14,26 +14,26 @@ const nextConfig = {
   },
 }
 
-// Conditionally enable Sentry only if auth token is available
-if (process.env.SENTRY_AUTH_TOKEN) {
-  const { withSentryConfig } = require("@sentry/nextjs");
+// Only enable Sentry in production with valid DSN
+if (process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_SENTRY_DSN) {
+  const { withSentryConfig } = require('@sentry/nextjs');
   
   module.exports = withSentryConfig(
     nextConfig,
     {
       silent: true,
-      org: "seftech-hub",
-      project: "logistics-platform",
+      org: 'lan-onasis',
+      project: 'logistics-project',
     },
     {
-      widenClientFileUpload: true,
-      transpileClientSDK: true,
-      tunnelRoute: "/monitoring",
+      // Additional config options for the Sentry Webpack plugin
+      // See: https://github.com/getsentry/sentry-webpack-plugin#options
+      // Suppresses source map uploading logs during build
+      silent: true,
+      // Hide source maps from generated client bundles
       hideSourceMaps: true,
-      disableLogger: true,
-      automaticVercelMonitors: true,
     }
-  )
+  );
 } else {
-  module.exports = nextConfig
+  module.exports = nextConfig;
 }

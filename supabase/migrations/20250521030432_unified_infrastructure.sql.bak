@@ -1,4 +1,4 @@
--- Enable PostGIS extensionnCREATE EXTENSION IF NOT EXISTS postgis;nn-- Unified Schema Organization Migration
+-- Unified Schema Organization Migration
 -- This migration organizes existing data into the new unified schema structure
 -- Run this after backing up your existing data
 

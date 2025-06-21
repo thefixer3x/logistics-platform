@@ -1,0 +1,19 @@
+{
+  "timestamp": "2025-06-21T10:34:09.661Z",
+  "data": {
+    "lastStarted": "2025-06-21T10:34:06.222Z",
+    "command": "npx -y @zapier/mcp-server",
+    "config": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@zapier/mcp-server"
+      ],
+      "env": {
+        "ZAPIER_API_KEY": "YOUR_ZAPIER_API_KEY"
+      }
+    },
+    "lastExited": "2025-06-21T10:34:09.661Z",
+    "exitCode": 1
+  }
+}

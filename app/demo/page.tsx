@@ -68,11 +68,32 @@ export default function DemoDashboard() {
             <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
               Demo Mode
             </Badge>
-            <Button variant="outline" size="sm">
-              <a href="/test-setup" className="flex items-center">
-                <Wrench className="h-4 w-4 mr-2" />
-                Setup Database
-              </a>
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={async () => {
+                try {
+                  const response = await fetch('/api/setup', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ action: 'setup' })
+                  });
+                  const result = await response.json();
+                  
+                  if (result.success) {
+                    alert(`✅ ${result.message}\nStatus: ${result.status}`);
+                  } else {
+                    alert(`❌ ${result.error}\nDetails: ${result.details}`);
+                  }
+                } catch (error) {
+                  alert(`⚠️ Network error: ${error instanceof Error ? error.message : String(error)}`);
+                }
+              }}
+            >
+              <Wrench className="h-4 w-4 mr-2" />
+              Setup Database
             </Button>
           </div>
         </div>

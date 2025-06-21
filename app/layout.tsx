@@ -19,10 +19,6 @@ export const metadata = {
   description: 'Comprehensive truck management and logistics platform with real-time tracking, automated payments, and intelligent SLA monitoring',
   keywords: 'logistics, truck management, fleet tracking, payment processing, SLA monitoring, Nigeria',
   authors: [{ name: 'SefTech Solutions' }],
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#2563eb' },
-    { media: '(prefers-color-scheme: dark)', color: '#1e40af' },
-  ],
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
@@ -74,7 +70,11 @@ export const viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
-  viewportFit: 'cover'
+  viewportFit: 'cover',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#2563eb' },
+    { media: '(prefers-color-scheme: dark)', color: '#1e40af' },
+  ],
 }
 
 export default function RootLayout({

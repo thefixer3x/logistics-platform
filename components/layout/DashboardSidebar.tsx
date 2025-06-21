@@ -119,8 +119,12 @@ export function DashboardSidebar() {
         {/* Logo */}
         <div className="flex items-center flex-shrink-0 px-4">
           <div className="flex items-center">
-            <div className="p-2 bg-logistics-600 text-white rounded-lg">
-              <Truck className="h-6 w-6" />
+            <div className="p-1">
+              <img 
+                src="/icons/seftec-shield-logo.svg" 
+                alt="SefTech Logo"
+                className="h-8 w-8"
+              />
             </div>
             <div className="ml-3">
               <h1 className="text-lg font-semibold text-gray-900">

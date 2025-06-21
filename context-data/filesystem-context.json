@@ -1,0 +1,16 @@
+{
+  "timestamp": "2025-06-21T10:34:06.208Z",
+  "data": {
+    "lastStarted": "2025-06-21T10:34:06.208Z",
+    "command": "npx -y @modelcontextprotocol/server-filesystem /Users/seyederick/DevOps /Users/seyederick/Downloads",
+    "config": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/seyederick/DevOps",
+        "/Users/seyederick/Downloads"
+      ]
+    }
+  }
+}

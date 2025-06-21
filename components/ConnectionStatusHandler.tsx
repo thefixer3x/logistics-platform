@@ -3,7 +3,7 @@
 import { useState, useEffect, ReactNode } from 'react'
 import { RetryButton } from '@/components/RetryButton'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Wifi, WifiOff } from 'lucide-react'
+import { Wifi, WifiOff, Clock, Wrench } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 
 interface ConnectionStatusHandlerProps {
@@ -27,13 +27,14 @@ export function ConnectionStatusHandler({
     setErrorMessage(null)
     try {
       // Use provided service check or default to Supabase connection check
-      const connected = serviceCheck 
-        ? await serviceCheck() 
+      const connected = serviceCheck
+        ? await serviceCheck()
         : await checkSupabaseConnection()
       
+      console.log(`[ConnectionStatusHandler] Connection status: ${connected}`)
       setIsConnected(connected)
     } catch (error) {
-      console.error('Connection check failed:', error)
+      console.error('[ConnectionStatusHandler] Connection check failed:', error)
       setIsConnected(false)
       setErrorMessage(getErrorMessage(error))
     } finally {
@@ -104,6 +105,7 @@ export function ConnectionStatusHandler({
   }
   
   useEffect(() => {
+    console.log('[ConnectionStatusHandler] Starting connection checks')
     // Initial check
     checkConnection()
     
@@ -111,7 +113,10 @@ export function ConnectionStatusHandler({
     const intervalId = setInterval(checkConnection, checkInterval)
     
     // Clean up on unmount
-    return () => clearInterval(intervalId)
+    return () => {
+      console.log('[ConnectionStatusHandler] Stopping connection checks')
+      clearInterval(intervalId)
+    }
   }, [checkInterval])
 
   if (!isConnected) {
@@ -125,13 +130,39 @@ export function ConnectionStatusHandler({
         </CardHeader>
         <CardContent>
           <p className="text-gray-600 mb-4">
-            {errorMessage || 'We\'re having trouble connecting to our services. This could be due to:'}
+            {errorMessage || 'We\'re having trouble connecting to our services.'}
           </p>
-          <ul className="list-disc list-inside text-gray-600 mb-4">
-            <li>Network connectivity issues</li>
-            <li>Server maintenance</li>
-            <li>Database connection problems</li>
-          </ul>
+          
+          <div className="space-y-3 mb-4">
+            <div className="flex items-start gap-3">
+              <Wifi className="h-5 w-5 text-gray-400 mt-0.5" />
+              <div>
+                <p className="font-medium">Check your internet connection</p>
+                <p className="text-sm text-gray-500">Ensure you have a stable network connection</p>
+              </div>
+            </div>
+            
+            <div className="flex items-start gap-3">
+              <Clock className="h-5 w-5 text-gray-400 mt-0.5" />
+              <div>
+                <p className="font-medium">Server may be busy</p>
+                <p className="text-sm text-gray-500">Try again in a few minutes</p>
+              </div>
+            </div>
+            
+            <div className="flex items-start gap-3">
+              <Wrench className="h-5 w-5 text-gray-400 mt-0.5" />
+              <div>
+                <p className="font-medium">Setup required</p>
+                <p className="text-sm text-gray-500">
+                  <a href="/test-setup" className="text-blue-600 hover:underline">
+                    Click here to setup database
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+          
           <RetryButton 
             onRetry={isChecking ? undefined : checkConnection}
           />

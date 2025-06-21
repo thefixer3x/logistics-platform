@@ -1,0 +1,18 @@
+{
+  "timestamp": "2025-06-21T10:34:06.218Z",
+  "data": {
+    "lastStarted": "2025-06-21T10:34:06.218Z",
+    "command": "npx -y @netlify/mcp",
+    "config": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@netlify/mcp"
+      ],
+      "env": {
+        "NETLIFY_PERSONAL_ACCESS_TOKEN": "YOUR_NETLIFY_PAT"
+      },
+      "timeout": 10000
+    }
+  }
+}
