@@ -15,6 +15,7 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata = {
+  metadataBase: new URL('https://fleet.seftec.tech'),
   title: 'SefTech Logistics Platform',
   description: 'Comprehensive truck management and logistics platform with real-time tracking, automated payments, and intelligent SLA monitoring',
   keywords: 'logistics, truck management, fleet tracking, payment processing, SLA monitoring, Nigeria',
@@ -34,7 +35,7 @@ export const metadata = {
     siteName: 'SefTech Logistics Platform',
     title: 'SefTech Logistics Platform',
     description: 'Comprehensive truck management and logistics platform',
-    url: 'https://logistics.seftech.com',
+    url: 'https://fleet.seftec.tech',
     images: [
       {
         url: '/icons/og-image.png',

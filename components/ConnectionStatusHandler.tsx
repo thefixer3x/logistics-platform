@@ -117,7 +117,7 @@ export function ConnectionStatusHandler({
       console.log('[ConnectionStatusHandler] Stopping connection checks')
       clearInterval(intervalId)
     }
-  }, [checkInterval])
+  }, [checkInterval, serviceCheck]) // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!isConnected) {
     return (
