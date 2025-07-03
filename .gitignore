@@ -34,3 +34,6 @@ vercel/
 netlify/
 .env
 .vercel
+
+# Local Netlify folder
+.netlify

@@ -6,7 +6,9 @@
       "Bash(npm run type-check:*)",
       "Bash(ls:*)",
       "Bash(npm run build:*)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(netlify deploy:*)",
+      "Bash(git add:*)"
     ],
     "deny": []
   }
