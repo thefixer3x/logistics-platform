@@ -1,9 +1,9 @@
 import { createClient } from '@supabase/supabase-js'
 
 // Unified Supabase Configuration
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://mxtsdgkwzjzlttpotole.supabase.co'
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im14dHNkZ2t3emp6bHR0cG90b2xlIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODcyNzAyNzAsImV4cCI6MjAwMjg0NjI3MH0.demo-key-for-local-development-only'
-const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im14dHNkZ2t3emp6bHR0cG90b2xlIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY4NzI3MDI3MCwiZXhwIjoyMDAyODQ2MjcwfQ.demo-key-for-local-development-only'
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://demo-placeholder.supabase.co'
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'demo-anon-key-placeholder'
+const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY || 'demo-service-key-placeholder'
 
 // Display warning during development if using fallback values
 if (process.env.NODE_ENV !== 'production' && typeof window !== 'undefined') {

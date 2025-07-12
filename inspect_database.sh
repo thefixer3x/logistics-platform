@@ -4,8 +4,11 @@
 echo "🔍 Inspecting current Supabase database structure..."
 
 # Set environment variables
-export SUPABASE_URL="https://mxtsdgkwzjzlttpotole.supabase.co"
-export SUPABASE_SERVICE_ROLE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im14dHNkZ2t3emp6bHR0cG90b2xlIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczNDE3MDU1OSwiZXhwIjoyMDQ5NzQ2NTU5fQ.H8J3t9GnLQVa8KlZmYc2vF1S9jX7tN0oR4uP6vK2Wz0"
+export SUPABASE_URL="${SUPABASE_URL:-https://your-project.supabase.co}"
+export SUPABASE_SERVICE_ROLE_KEY="${SUPABASE_SERVICE_ROLE_KEY:-your-service-role-key-here}"
+
+echo "⚠️  Using environment variables for database connection"
+echo "Make sure SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are set"
 
 # Install psql if not available
 if ! command -v psql &> /dev/null; then

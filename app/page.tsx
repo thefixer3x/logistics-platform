@@ -1,9 +1,49 @@
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Truck, Shield, BarChart3, Users, MapPin, Clock, CheckCircle, Star } from 'lucide-react'
+"use client";
+
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Truck,
+  Shield,
+  BarChart3,
+  Users,
+  MapPin,
+  Clock,
+  CheckCircle,
+  Star,
+} from "lucide-react";
+import { isDemoMode } from "@/lib/demo-config";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function HomePage() {
+  const router = useRouter();
+
+  useEffect(() => {
+    // Redirect to demo landing page if in demo mode
+    if (isDemoMode()) {
+      router.push("/demo-landing");
+    }
+  }, [router]);
+
+  // If in demo mode, show loading state while redirecting
+  if (isDemoMode()) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <Truck className="h-12 w-12 text-blue-600 mx-auto mb-4 animate-pulse" />
+          <p className="text-gray-600">Loading demo...</p>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
       {/* Navigation */}
@@ -12,7 +52,9 @@ export default function HomePage() {
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-2">
               <Truck className="h-8 w-8 text-blue-600" />
-              <span className="text-xl font-bold text-gray-900">SefTech Logistics</span>
+              <span className="text-xl font-bold text-gray-900">
+                SefTech Logistics
+              </span>
             </div>
             <div className="flex space-x-4">
               <Link href="/demo">
@@ -40,12 +82,13 @@ export default function HomePage() {
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-            Streamline Your 
+            Streamline Your
             <span className="text-blue-600 block">Logistics Operations</span>
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Comprehensive truck management platform with real-time tracking, 
-            automated payments, and intelligent SLA monitoring for modern logistics companies.
+            Comprehensive truck management platform with real-time tracking,
+            automated payments, and intelligent SLA monitoring for modern
+            logistics companies.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/login">
@@ -68,7 +111,8 @@ export default function HomePage() {
               Everything You Need for Modern Logistics
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Powerful features designed to optimize your fleet operations and improve efficiency
+              Powerful features designed to optimize your fleet operations and
+              improve efficiency
             </p>
           </div>
 
@@ -78,7 +122,8 @@ export default function HomePage() {
                 <MapPin className="h-12 w-12 text-blue-600 mb-4" />
                 <CardTitle>Real-Time Tracking</CardTitle>
                 <CardDescription>
-                  Monitor your fleet with GPS tracking, route optimization, and live updates
+                  Monitor your fleet with GPS tracking, route optimization, and
+                  live updates
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -88,7 +133,8 @@ export default function HomePage() {
                 <BarChart3 className="h-12 w-12 text-green-600 mb-4" />
                 <CardTitle>Smart Analytics</CardTitle>
                 <CardDescription>
-                  Comprehensive reporting with SLA monitoring and performance insights
+                  Comprehensive reporting with SLA monitoring and performance
+                  insights
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -98,7 +144,8 @@ export default function HomePage() {
                 <Shield className="h-12 w-12 text-purple-600 mb-4" />
                 <CardTitle>Automated Payments</CardTitle>
                 <CardDescription>
-                  Secure payment processing with Stripe integration and contract management
+                  Secure payment processing with Stripe integration and contract
+                  management
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -108,7 +155,8 @@ export default function HomePage() {
                 <Users className="h-12 w-12 text-red-600 mb-4" />
                 <CardTitle>Multi-Role Dashboards</CardTitle>
                 <CardDescription>
-                  Customized interfaces for drivers, supervisors, and contractors
+                  Customized interfaces for drivers, supervisors, and
+                  contractors
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -128,7 +176,8 @@ export default function HomePage() {
                 <CheckCircle className="h-12 w-12 text-teal-600 mb-4" />
                 <CardTitle>SLA Compliance</CardTitle>
                 <CardDescription>
-                  Automated SLA monitoring with rollover management and reporting
+                  Automated SLA monitoring with rollover management and
+                  reporting
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -145,11 +194,15 @@ export default function HomePage() {
               <div className="text-gray-600">Active Trucks</div>
             </div>
             <div>
-              <div className="text-4xl font-bold text-green-600 mb-2">98.5%</div>
+              <div className="text-4xl font-bold text-green-600 mb-2">
+                98.5%
+              </div>
               <div className="text-gray-600">Uptime</div>
             </div>
             <div>
-              <div className="text-4xl font-bold text-purple-600 mb-2">₦2.5B+</div>
+              <div className="text-4xl font-bold text-purple-600 mb-2">
+                ₦2.5B+
+              </div>
               <div className="text-gray-600">Payments Processed</div>
             </div>
             <div>
@@ -167,10 +220,15 @@ export default function HomePage() {
             Ready to Transform Your Logistics?
           </h2>
           <p className="text-xl text-blue-100 mb-8">
-            Join hundreds of companies already using SefTech Logistics to streamline their operations
+            Join hundreds of companies already using SefTech Logistics to
+            streamline their operations
           </p>
           <Link href="/login">
-            <Button size="lg" variant="secondary" className="bg-white text-blue-600 hover:bg-gray-50">
+            <Button
+              size="lg"
+              variant="secondary"
+              className="bg-white text-blue-600 hover:bg-gray-50"
+            >
               Get Started Today
             </Button>
           </Link>
@@ -224,5 +282,5 @@ export default function HomePage() {
         </div>
       </footer>
     </div>
-  )
+  );
 }

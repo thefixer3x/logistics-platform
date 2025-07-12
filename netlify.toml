@@ -6,13 +6,34 @@
   NODE_VERSION = "18.17.0"
   NPM_VERSION = "10.2.3"
 
+# Demo mode production environment
+[context.production.environment]
+  NEXT_PUBLIC_DEMO_MODE = "true"
+  NEXT_PUBLIC_SUPABASE_URL = "https://demo.logistics.seftech.com"
+  NEXT_PUBLIC_SUPABASE_ANON_KEY = "demo-anon-key-for-display-only"
+  SUPABASE_SERVICE_ROLE_KEY = "demo-service-key-for-display-only"
+  NEXT_PUBLIC_APP_URL = "https://seftech-logistics-demo.netlify.app"
+
+# Demo mode for deploy previews
+[context.deploy-preview.environment]
+  NEXT_PUBLIC_DEMO_MODE = "true"
+  NEXT_PUBLIC_SUPABASE_URL = "https://demo.logistics.seftech.com"
+  NEXT_PUBLIC_SUPABASE_ANON_KEY = "demo-anon-key-for-display-only"
+
 # Handle Next.js routes
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
-# Define environment variables
+# Demo mode specific redirect
+[[redirects]]
+  from = "/"
+  to = "/demo-landing"
+  status = 302
+  condition = "NEXT_PUBLIC_DEMO_MODE=true"
+
+# Template environment variables (for reference)
 [template.environment]
   NEXT_PUBLIC_SUPABASE_URL = "Supabase project URL"
   NEXT_PUBLIC_SUPABASE_ANON_KEY = "Supabase anonymous key"
@@ -22,6 +43,7 @@
   FLUTTERWAVE_SECRET_KEY = "Flutterwave secret key"
   PREMBLY_APP_ID = "Prembly application ID"
   PREMBLY_X_API_KEY = "Prembly API key"
+  NEXT_PUBLIC_DEMO_MODE = "Set to 'true' for demo mode"
 
 # Set up serverless functions for API routes
 [functions]
@@ -34,7 +56,22 @@
   [headers.values]
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
     Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://*; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.paystack.co https://api.flutterwave.com https://api.prembly.com;"
+
+# Demo mode headers
+[[headers]]
+  for = "/demo*"
+  [headers.values]
+    X-Demo-Mode = "true"
+    X-Robots-Tag = "noindex, nofollow"
+
+# Cache static assets
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
     
 # Performance optimization
 [[plugins]]

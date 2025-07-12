@@ -7,27 +7,27 @@
 -- ============================================================================
 
 -- Sample contractors
-INSERT INTO logistics.profiles (id, email, first_name, last_name, phone, role, company_name, status) VALUES
-(gen_random_uuid(), 'contractor1@seftech.com', 'Adebayo', 'Okafor', '+234-801-234-5678', 'contractor', 'Lagos Logistics Ltd', 'active'),
-(gen_random_uuid(), 'contractor2@seftech.com', 'Chioma', 'Nwosu', '+234-802-345-6789', 'contractor', 'Western Transport Co', 'active'),
-(gen_random_uuid(), 'contractor3@seftech.com', 'Ibrahim', 'Mohammed', '+234-803-456-7890', 'contractor', 'Northern Freight Services', 'active')
+INSERT INTO logistics.profiles (id, email, first_name, last_name, phone, role, company_name, status, is_sample_data) VALUES
+('11111111-1111-1111-1111-111111111111', 'contractor1@seftech.com', 'Adebayo', 'Okafor', '+234-801-234-5678', 'contractor', 'Lagos Logistics Ltd', 'active', true),
+('22222222-2222-2222-2222-222222222222', 'contractor2@seftech.com', 'Chioma', 'Nwosu', '+234-802-345-6789', 'contractor', 'Western Transport Co', 'active', true),
+('33333333-3333-3333-3333-333333333333', 'contractor3@seftech.com', 'Ibrahim', 'Mohammed', '+234-803-456-7890', 'contractor', 'Northern Freight Services', 'active', true)
 ON CONFLICT (email) DO NOTHING;
 
 -- Sample supervisors
-INSERT INTO logistics.profiles (id, email, first_name, last_name, phone, role, status) VALUES
-(gen_random_uuid(), 'supervisor1@seftech.com', 'Folake', 'Adeyemi', '+234-805-567-8901', 'supervisor', 'active'),
-(gen_random_uuid(), 'supervisor2@seftech.com', 'Emeka', 'Okwu', '+234-806-678-9012', 'supervisor', 'active'),
-(gen_random_uuid(), 'admin@seftech.com', 'Kemi', 'Balogun', '+234-807-789-0123', 'admin', 'active')
+INSERT INTO logistics.profiles (id, email, first_name, last_name, phone, role, status, is_sample_data) VALUES
+('44444444-4444-4444-4444-444444444444', 'supervisor1@seftech.com', 'Folake', 'Adeyemi', '+234-805-567-8901', 'supervisor', 'active', true),
+('55555555-5555-5555-5555-555555555555', 'supervisor2@seftech.com', 'Emeka', 'Okwu', '+234-806-678-9012', 'supervisor', 'active', true),
+('66666666-6666-6666-6666-666666666666', 'admin@seftech.com', 'Kemi', 'Balogun', '+234-807-789-0123', 'admin', 'active', true)
 ON CONFLICT (email) DO NOTHING;
 
 -- Sample drivers
-INSERT INTO logistics.profiles (id, email, first_name, last_name, phone, role, status) VALUES
-(gen_random_uuid(), 'driver1@seftech.com', 'Musa', 'Abdullahi', '+234-811-111-1111', 'driver', 'active'),
-(gen_random_uuid(), 'driver2@seftech.com', 'Tunde', 'Olayiwola', '+234-812-222-2222', 'driver', 'active'),
-(gen_random_uuid(), 'driver3@seftech.com', 'Ngozi', 'Eze', '+234-813-333-3333', 'driver', 'active'),
-(gen_random_uuid(), 'driver4@seftech.com', 'Yakubu', 'Garba', '+234-814-444-4444', 'driver', 'active'),
-(gen_random_uuid(), 'driver5@seftech.com', 'Amina', 'Yusuf', '+234-815-555-5555', 'driver', 'active'),
-(gen_random_uuid(), 'driver6@seftech.com', 'Segun', 'Adesanya', '+234-816-666-6666', 'driver', 'active')
+INSERT INTO logistics.profiles (id, email, first_name, last_name, phone, role, status, is_sample_data) VALUES
+('77777777-7777-7777-7777-777777777777', 'driver1@seftech.com', 'Musa', 'Abdullahi', '+234-811-111-1111', 'driver', 'active', true),
+('88888888-8888-8888-8888-888888888888', 'driver2@seftech.com', 'Tunde', 'Olayiwola', '+234-812-222-2222', 'driver', 'active', true),
+('99999999-9999-9999-9999-999999999999', 'driver3@seftech.com', 'Ngozi', 'Eze', '+234-813-333-3333', 'driver', 'active', true),
+('aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'driver4@seftech.com', 'Yakubu', 'Garba', '+234-814-444-4444', 'driver', 'active', true),
+('bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', 'driver5@seftech.com', 'Amina', 'Yusuf', '+234-815-555-5555', 'driver', 'active', true),
+('cccccccc-cccc-cccc-cccc-cccccccccccc', 'driver6@seftech.com', 'Segun', 'Adesanya', '+234-816-666-6666', 'driver', 'active', true)
 ON CONFLICT (email) DO NOTHING;
 
 -- ============================================================================

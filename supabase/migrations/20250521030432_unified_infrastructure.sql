@@ -31,7 +31,8 @@ BEGIN
   ELSE
     -- Create profiles table in logistics schema
     CREATE TABLE logistics.profiles (
-      id UUID REFERENCES auth.users(id) ON DELETE CASCADE PRIMARY KEY,
+      id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+      auth_user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
       email VARCHAR NOT NULL UNIQUE,
       first_name VARCHAR,
       last_name VARCHAR,
@@ -40,6 +41,7 @@ BEGIN
       company_name VARCHAR,
       avatar_url TEXT,
       status VARCHAR CHECK (status IN ('active', 'inactive', 'suspended')) DEFAULT 'active',
+      is_sample_data BOOLEAN DEFAULT false,
       metadata JSONB,
       created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
       updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
@@ -50,21 +52,101 @@ BEGIN
   IF EXISTS (SELECT FROM information_schema.tables WHERE table_schema = 'public' AND table_name = 'trucks') THEN
     -- Create view in logistics schema
     CREATE OR REPLACE VIEW logistics.trucks AS SELECT * FROM public.trucks;
+  ELSE
+    -- Create trucks table if it doesn't exist
+    CREATE TABLE logistics.trucks (
+      id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+      license_plate VARCHAR NOT NULL UNIQUE,
+      make VARCHAR NOT NULL,
+      model VARCHAR NOT NULL,
+      year INTEGER,
+      vin VARCHAR UNIQUE,
+      driver_id UUID REFERENCES logistics.profiles(id),
+      contractor_id UUID REFERENCES logistics.profiles(id),
+      status VARCHAR CHECK (status IN ('active', 'maintenance', 'inactive', 'retired')) DEFAULT 'active',
+      fuel_type VARCHAR DEFAULT 'diesel',
+      capacity_kg DECIMAL(10,2),
+      last_service_date DATE,
+      next_service_date DATE,
+      insurance_expiry DATE,
+      registration_expiry DATE,
+      metadata JSONB,
+      created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+      updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+    );
   END IF;
 
   -- Migrate trips table
   IF EXISTS (SELECT FROM information_schema.tables WHERE table_schema = 'public' AND table_name = 'trips') THEN
     CREATE OR REPLACE VIEW logistics.trips AS SELECT * FROM public.trips;
+  ELSE
+    -- Create trips table if it doesn't exist
+    CREATE TABLE logistics.trips (
+      id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+      truck_id UUID REFERENCES logistics.trucks(id),
+      driver_id UUID REFERENCES logistics.profiles(id),
+      contract_id UUID,
+      origin JSONB NOT NULL,
+      destination JSONB NOT NULL,
+      scheduled_departure TIMESTAMP WITH TIME ZONE,
+      actual_departure TIMESTAMP WITH TIME ZONE,
+      scheduled_delivery TIMESTAMP WITH TIME ZONE,
+      actual_delivery TIMESTAMP WITH TIME ZONE,
+      status VARCHAR CHECK (status IN ('scheduled', 'in_progress', 'completed', 'cancelled', 'delayed')) DEFAULT 'scheduled',
+      distance_km DECIMAL(10,2),
+      fuel_consumed DECIMAL(8,2),
+      cargo_weight DECIMAL(10,2),
+      notes TEXT,
+      metadata JSONB,
+      created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+      updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+      started_at TIMESTAMP WITH TIME ZONE,
+      completed_at TIMESTAMP WITH TIME ZONE
+    );
   END IF;
 
   -- Migrate contracts table
   IF EXISTS (SELECT FROM information_schema.tables WHERE table_schema = 'public' AND table_name = 'contracts') THEN
     CREATE OR REPLACE VIEW logistics.contracts AS SELECT * FROM public.contracts;
+  ELSE
+    -- Create contracts table if it doesn't exist
+    CREATE TABLE logistics.contracts (
+      id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+      contractor_id UUID REFERENCES logistics.profiles(id),
+      driver_id UUID REFERENCES logistics.profiles(id),
+      contract_type VARCHAR CHECK (contract_type IN ('driver', 'contractor', 'lease')) DEFAULT 'driver',
+      start_date DATE NOT NULL,
+      end_date DATE,
+      daily_rate DECIMAL(10,2),
+      payment_schedule VARCHAR CHECK (payment_schedule IN ('daily', 'weekly', 'monthly')) DEFAULT 'daily',
+      terms TEXT,
+      status VARCHAR CHECK (status IN ('draft', 'active', 'expired', 'terminated')) DEFAULT 'draft',
+      metadata JSONB,
+      created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+      updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+    );
   END IF;
 
   -- Move payments to payments schema
   IF EXISTS (SELECT FROM information_schema.tables WHERE table_schema = 'public' AND table_name = 'payments') THEN
     CREATE OR REPLACE VIEW payments.payments AS SELECT * FROM public.payments;
+  ELSE
+    -- Create payments table if it doesn't exist
+    CREATE TABLE payments.payments (
+      id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+      user_id UUID REFERENCES logistics.profiles(id),
+      contract_id UUID REFERENCES logistics.contracts(id),
+      amount DECIMAL(12,2) NOT NULL,
+      payment_type VARCHAR CHECK (payment_type IN ('salary', 'bonus', 'daily_allowance', 'fuel_reimbursement', 'maintenance')) DEFAULT 'daily_allowance',
+      payment_method VARCHAR CHECK (payment_method IN ('bank_transfer', 'mobile_money', 'cash', 'check')) DEFAULT 'bank_transfer',
+      status VARCHAR CHECK (status IN ('pending', 'processing', 'completed', 'failed', 'cancelled')) DEFAULT 'pending',
+      reference VARCHAR UNIQUE,
+      description TEXT,
+      metadata JSONB,
+      processed_at TIMESTAMP WITH TIME ZONE,
+      created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+      updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+    );
   END IF;
 
   -- Move notifications to logistics schema
@@ -210,7 +292,8 @@ CREATE TABLE IF NOT EXISTS reporting.performance_dashboards (
 
 -- Truck location indexes
 CREATE INDEX IF NOT EXISTS idx_truck_locations_truck_time ON logistics.truck_locations(truck_id, recorded_at DESC);
-CREATE INDEX IF NOT EXISTS idx_truck_locations_geo ON logistics.truck_locations USING GIST(ST_Point(longitude, latitude));
+-- Note: PostGIS spatial index will be created after PostGIS extension is confirmed
+-- CREATE INDEX IF NOT EXISTS idx_truck_locations_geo ON logistics.truck_locations USING GIST(ST_Point(longitude, latitude));
 
 -- Route optimization indexes
 CREATE INDEX IF NOT EXISTS idx_route_optimization_truck ON logistics.route_optimization(truck_id, status);
@@ -418,7 +501,13 @@ VALUES
 
 -- Log this migration
 INSERT INTO monitoring.audit_logs (action, resource_type, resource_id, new_values)
-VALUES ('schema_migration', 'database', gen_random_uuid(), '{"migration": "unified_infrastructure", "timestamp": "' || NOW() || '"}');
+VALUES ('schema_migration', 'database', gen_random_uuid(), 
+  jsonb_build_object(
+    'migration', 'unified_infrastructure',
+    'timestamp', NOW()::text,
+    'description', 'Unified schema organization migration completed'
+  )
+);
 
 COMMENT ON SCHEMA logistics IS 'Core logistics operations including trucks, trips, drivers, and routes';
 COMMENT ON SCHEMA payments IS 'Payment processing, schedules, and financial analytics';
