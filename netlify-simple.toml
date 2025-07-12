@@ -1,0 +1,40 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "18.17.0"
+  NPM_VERSION = "10.2.3"
+  NEXT_PUBLIC_DEMO_MODE = "true"
+  NEXT_PUBLIC_SUPABASE_URL = "https://demo.logistics.seftech.com"
+  NEXT_PUBLIC_SUPABASE_ANON_KEY = "demo-anon-key-for-display-only"
+
+# Simple redirect for demo mode
+[[redirects]]
+  from = "/"
+  to = "/demo-landing"
+  status = 302
+
+# Catch-all for Next.js routes
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Security headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+
+# Demo mode indicator
+[[headers]]
+  for = "/demo*"
+  [headers.values]
+    X-Demo-Mode = "true"
+
+# Next.js optimization
+[[plugins]]
+  package = "@netlify/plugin-nextjs"

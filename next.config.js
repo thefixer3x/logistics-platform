@@ -5,11 +5,10 @@ const nextConfig = {
   },
   images: {
     domains: ["avatars.githubusercontent.com", "lh3.googleusercontent.com"],
-    // Disable optimization in demo mode for static export
+    // Disable optimization in demo mode but don't use static export for Netlify
     unoptimized: process.env.NEXT_PUBLIC_DEMO_MODE === "true",
   },
-  // Enable static export for demo mode
-  output: process.env.NEXT_PUBLIC_DEMO_MODE === "true" ? "export" : undefined,
+  // Don't use static export for Netlify - it handles Next.js builds natively
   trailingSlash: process.env.NEXT_PUBLIC_DEMO_MODE === "true",
   env: {
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
