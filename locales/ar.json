@@ -1,0 +1,30 @@
+{
+  "app": {
+    "title": "منصة سيفتك هاب للخدمات اللوجستية",
+    "description": "إدارة شاملة للخدمات اللوجستية وسلسلة التوريد",
+    "welcome": "مرحبًا بك في سيفتك هاب للخدمات اللوجستية",
+    "tagline": "تبسيط عمليات سلسلة التوريد الخاصة بك"
+  },
+  "logistics": {
+    "shipments": "الشحنات",
+    "tracking": "تتبع الطرود",
+    "warehouses": "المستودعات",
+    "inventory": "إدارة المخزون",
+    "routes": "تحسين المسارات",
+    "delivery": "إدارة التوصيل"
+  },
+  "supply_chain": {
+    "suppliers": "الموردون",
+    "procurement": "المشتريات",
+    "quality_control": "مراقبة الجودة",
+    "compliance": "إدارة الامتثال",
+    "cost_analysis": "تحليل التكاليف"
+  },
+  "operations": {
+    "fleet_management": "إدارة الأسطول",
+    "driver_management": "إدارة السائقين",
+    "fuel_tracking": "تتبع الوقود",
+    "maintenance": "صيانة المركبات",
+    "scheduling": "جدولة التوصيل"
+  }
+}

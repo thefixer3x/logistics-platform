@@ -1,0 +1,30 @@
+{
+  "app": {
+    "title": "SeftecHubロジスティクスプラットフォーム",
+    "description": "総合的な物流とサプライチェーン管理",
+    "welcome": "SeftecHubロジスティクスへようこそ",
+    "tagline": "サプライチェーン業務を効率化"
+  },
+  "logistics": {
+    "shipments": "出荷",
+    "tracking": "荷物追跡",
+    "warehouses": "倉庫",
+    "inventory": "在庫管理",
+    "routes": "ルート最適化",
+    "delivery": "配送管理"
+  },
+  "supply_chain": {
+    "suppliers": "サプライヤー",
+    "procurement": "調達",
+    "quality_control": "品質管理",
+    "compliance": "コンプライアンス管理",
+    "cost_analysis": "コスト分析"
+  },
+  "operations": {
+    "fleet_management": "車両管理",
+    "driver_management": "ドライバー管理",
+    "fuel_tracking": "燃料追跡",
+    "maintenance": "車両メンテナンス",
+    "scheduling": "配送スケジューリング"
+  }
+}

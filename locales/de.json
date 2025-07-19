@@ -1,0 +1,30 @@
+{
+  "app": {
+    "title": "SeftecHub Logistikplattform",
+    "description": "Umfassendes Logistik- und Lieferkettenmanagement",
+    "welcome": "Willkommen bei SeftecHub Logistics",
+    "tagline": "Optimieren Sie Ihre Lieferkettenprozesse"
+  },
+  "logistics": {
+    "shipments": "Sendungen",
+    "tracking": "Paketverfolgung",
+    "warehouses": "Lagerhäuser",
+    "inventory": "Bestandsverwaltung",
+    "routes": "Routenoptimierung",
+    "delivery": "Liefermanagement"
+  },
+  "supply_chain": {
+    "suppliers": "Lieferanten",
+    "procurement": "Beschaffung",
+    "quality_control": "Qualitätskontrolle",
+    "compliance": "Compliance-Management",
+    "cost_analysis": "Kostenanalyse"
+  },
+  "operations": {
+    "fleet_management": "Fuhrparkmanagement",
+    "driver_management": "Fahrerverwaltung",
+    "fuel_tracking": "Kraftstoffüberwachung",
+    "maintenance": "Fahrzeugwartung",
+    "scheduling": "Lieferplanung"
+  }
+}

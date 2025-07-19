@@ -1,0 +1,30 @@
+{
+  "app": {
+    "title": "Plataforma logística SeftecHub",
+    "description": "Gestión integral de logística y cadena de suministro",
+    "welcome": "Bienvenido a SeftecHub Logistics",
+    "tagline": "Optimiza tus operaciones de cadena de suministro"
+  },
+  "logistics": {
+    "shipments": "Envíos",
+    "tracking": "Seguimiento de paquetes",
+    "warehouses": "Almacenes",
+    "inventory": "Gestión de inventario",
+    "routes": "Optimización de rutas",
+    "delivery": "Gestión de entregas"
+  },
+  "supply_chain": {
+    "suppliers": "Proveedores",
+    "procurement": "Adquisiciones",
+    "quality_control": "Control de calidad",
+    "compliance": "Gestión de cumplimiento",
+    "cost_analysis": "Análisis de costos"
+  },
+  "operations": {
+    "fleet_management": "Gestión de flota",
+    "driver_management": "Gestión de conductores",
+    "fuel_tracking": "Seguimiento de combustible",
+    "maintenance": "Mantenimiento de vehículos",
+    "scheduling": "Programación de entregas"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "app": {
+    "title": "SeftecHub 物流平台",
+    "description": "综合物流与供应链管理",
+    "welcome": "欢迎使用 SeftecHub 物流平台",
+    "tagline": "优化您的供应链运营"
+  },
+  "logistics": {
+    "shipments": "货物运输",
+    "tracking": "包裹追踪",
+    "warehouses": "仓库管理",
+    "inventory": "库存管理",
+    "routes": "路线优化",
+    "delivery": "配送管理"
+  },
+  "supply_chain": {
+    "suppliers": "供应商",
+    "procurement": "采购管理",
+    "quality_control": "质量控制",
+    "compliance": "合规管理",
+    "cost_analysis": "成本分析"
+  },
+  "operations": {
+    "fleet_management": "车队管理",
+    "driver_management": "司机管理",
+    "fuel_tracking": "燃料追踪",
+    "maintenance": "车辆维护",
+    "scheduling": "配送调度"
+  }
+}

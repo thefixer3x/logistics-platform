@@ -4,9 +4,13 @@
 
 const { createClient } = require('@supabase/supabase-js')
 
-// Direct configuration
-const supabaseUrl = 'https://mxtsdgkwzjzlttpotole.supabase.co'
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im14dHNkZ2t3emp6bHR0cG90b2xlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQxNzA1NTksImV4cCI6MjA0OTc0NjU1OX0.1-6g8xz5mwLNb2FQH_pHc7D0J9tqW3F0W6oB8KQR_0Y'
+// Environment-based configuration (secure)
+const supabaseUrl = process.env.SUPABASE_URL || 'https://mxtsdgkwzjzlttpotole.supabase.co'
+const supabaseKey = process.env.SUPABASE_ANON_KEY || (() => {
+  console.error('❌ SUPABASE_ANON_KEY not set in environment variables')
+  console.error('   Set it with: export SUPABASE_ANON_KEY="your_key_here"')
+  process.exit(1)
+})()
 
 const supabase = createClient(supabaseUrl, supabaseKey)
 
