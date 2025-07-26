@@ -3,7 +3,7 @@
   publish = ".next"
 
 [build.environment]
-  NODE_VERSION = "20.0.0"
+  NODE_VERSION = "20.5.0"
   NPM_VERSION = "10.2.3"
   NEXT_PUBLIC_DEMO_MODE = "true"
   NEXT_PUBLIC_SUPABASE_URL = "https://demo.logistics.seftech.com"
