@@ -1,48 +1,13 @@
 [
   {
-    "path": "/api/notifications/send",
-    "type": "api",
-    "file": "app/api/notifications/send/route.ts"
+    "path": "/test-setup",
+    "type": "page",
+    "file": "app/test-setup/page.tsx"
   },
   {
-    "path": "/api/payments/flutterwave",
-    "type": "api",
-    "file": "app/api/payments/flutterwave/route.ts"
-  },
-  {
-    "path": "/api/payments/paystack/initialize",
-    "type": "api",
-    "file": "app/api/payments/paystack/initialize/route.ts"
-  },
-  {
-    "path": "/api/payments/paystack",
-    "type": "api",
-    "file": "app/api/payments/paystack/route.ts"
-  },
-  {
-    "path": "/api/payments/stripe",
-    "type": "api",
-    "file": "app/api/payments/stripe/route.ts"
-  },
-  {
-    "path": "/api/payments/stripe/subscription",
-    "type": "api",
-    "file": "app/api/payments/stripe/subscription/route.ts"
-  },
-  {
-    "path": "/api/setup",
-    "type": "api",
-    "file": "app/api/setup/route.ts"
-  },
-  {
-    "path": "/api/trips",
-    "type": "api",
-    "file": "app/api/trips/route.ts"
-  },
-  {
-    "path": "/api/trucks/location",
-    "type": "api",
-    "file": "app/api/trucks/location/route.ts"
+    "path": "/setup",
+    "type": "page",
+    "file": "app/setup/page.tsx"
   },
   {
     "path": "/api/verification/prembly",
@@ -50,24 +15,94 @@
     "file": "app/api/verification/prembly/route.ts"
   },
   {
-    "path": "/api/webhooks/stripe",
-    "type": "api",
-    "file": "app/api/webhooks/stripe/route.ts"
-  },
-  {
     "path": "/api/webhooks/stripe-subscription",
     "type": "api",
     "file": "app/api/webhooks/stripe-subscription/route.ts"
   },
   {
+    "path": "/api/webhooks/stripe",
+    "type": "api",
+    "file": "app/api/webhooks/stripe/route.ts"
+  },
+  {
+    "path": "/api/setup",
+    "type": "api",
+    "file": "app/api/setup/route.ts"
+  },
+  {
+    "path": "/api/notifications/send",
+    "type": "api",
+    "file": "app/api/notifications/send/route.ts"
+  },
+  {
+    "path": "/api/trucks/location",
+    "type": "api",
+    "file": "app/api/trucks/location/route.ts"
+  },
+  {
+    "path": "/api/trips",
+    "type": "api",
+    "file": "app/api/trips/route.ts"
+  },
+  {
+    "path": "/api/payments/flutterwave",
+    "type": "api",
+    "file": "app/api/payments/flutterwave/route.ts"
+  },
+  {
+    "path": "/api/payments/paystack",
+    "type": "api",
+    "file": "app/api/payments/paystack/route.ts"
+  },
+  {
+    "path": "/api/payments/paystack/initialize",
+    "type": "api",
+    "file": "app/api/payments/paystack/initialize/route.ts"
+  },
+  {
+    "path": "/api/payments/stripe/subscription",
+    "type": "api",
+    "file": "app/api/payments/stripe/subscription/route.ts"
+  },
+  {
+    "path": "/api/payments/stripe",
+    "type": "api",
+    "file": "app/api/payments/stripe/route.ts"
+  },
+  {
+    "path": "/offline",
+    "type": "page",
+    "file": "app/offline/page.tsx"
+  },
+  {
+    "path": "/demo-landing",
+    "type": "page",
+    "file": "app/demo-landing/page.tsx"
+  },
+  {
+    "path": "/",
+    "type": "page",
+    "file": "app/page.tsx"
+  },
+  {
+    "path": "/demo",
+    "type": "page",
+    "file": "app/demo/page.tsx"
+  },
+  {
+    "path": "/dashboard/verification",
+    "type": "page",
+    "file": "app/dashboard/verification/page.tsx"
+  },
+  {
+    "path": "/dashboard/supervisor",
+    "type": "page",
+    "file": "app/dashboard/supervisor/page.tsx"
+  },
+  {
     "path": "/dashboard/contractor",
     "type": "page",
     "file": "app/dashboard/contractor/page.tsx"
-  },
-  {
-    "path": "/dashboard/driver",
-    "type": "page",
-    "file": "app/dashboard/driver/page.tsx"
   },
   {
     "path": "/dashboard",
@@ -80,48 +115,13 @@
     "file": "app/dashboard/payment-test/page.tsx"
   },
   {
-    "path": "/dashboard/supervisor",
+    "path": "/dashboard/driver",
     "type": "page",
-    "file": "app/dashboard/supervisor/page.tsx"
-  },
-  {
-    "path": "/dashboard/verification",
-    "type": "page",
-    "file": "app/dashboard/verification/page.tsx"
-  },
-  {
-    "path": "/demo",
-    "type": "page",
-    "file": "app/demo/page.tsx"
-  },
-  {
-    "path": "/demo-landing",
-    "type": "page",
-    "file": "app/demo-landing/page.tsx"
+    "file": "app/dashboard/driver/page.tsx"
   },
   {
     "path": "/hello",
     "type": "page",
     "file": "app/hello/page.tsx"
-  },
-  {
-    "path": "/offline",
-    "type": "page",
-    "file": "app/offline/page.tsx"
-  },
-  {
-    "path": "/",
-    "type": "page",
-    "file": "app/page.tsx"
-  },
-  {
-    "path": "/setup",
-    "type": "page",
-    "file": "app/setup/page.tsx"
-  },
-  {
-    "path": "/test-setup",
-    "type": "page",
-    "file": "app/test-setup/page.tsx"
   }
 ]
