@@ -1,0 +1,188 @@
+functionsDirectory = "/Users/seyederick/DevOps/_project_folders/seftechub-workspace/apps/logistics-platform/netlify/functions"
+functionsDirectoryOrigin = "config-v1"
+headersOrigin = "config"
+redirectsOrigin = "config"
+
+[[edge_functions]]
+function = "prembly-verification"
+path = "/api/prembly-verification"
+
+[[edge_functions]]
+function = "health-check"
+path = "/api/health-check/*"
+
+[[edge_functions]]
+function = "load-balancer"
+path = "/api/load-balancer/*"
+
+[[edge_functions]]
+function = "rate-limiter"
+path = "/api/prembly-verification"
+
+[forms]
+spam_action = "block"
+
+[identity]
+enabled = false
+
+[large_media]
+enabled = false
+
+[functions]
+
+[functions."*"]
+node_bundler = "esbuild"
+
+[[plugins]]
+origin = "default"
+package = "@netlify/plugin-nextjs"
+
+[plugins.inputs]
+
+[[plugins]]
+origin = "config"
+package = "@netlify/plugin-lighthouse"
+
+[plugins.inputs]
+
+[[plugins]]
+origin = "config"
+package = "netlify-plugin-checklinks"
+
+[plugins.inputs]
+
+[build]
+publish = "/Users/seyederick/DevOps/_project_folders/seftechub-workspace/apps/logistics-platform/apps/seftec-store/dist"
+publishOrigin = "config"
+commandOrigin = "config"
+base = "/Users/seyederick/DevOps/_project_folders/seftechub-workspace/apps/logistics-platform"
+command = "npm run build"
+functions = "/Users/seyederick/DevOps/_project_folders/seftechub-workspace/apps/logistics-platform/netlify/functions"
+
+[build.environment]
+NODE_VERSION = "18"
+NPM_VERSION = "9"
+NODE_ENV = "production"
+
+[build.processing]
+
+[build.processing.css]
+
+[build.processing.html]
+
+[build.processing.images]
+
+[build.processing.js]
+
+[build.services]
+
+[[headers]]
+for = "/api/*"
+
+[headers.values]
+X-Frame-Options = "DENY"
+X-Content-Type-Options = "nosniff"
+Referrer-Policy = "strict-origin-when-cross-origin"
+Access-Control-Allow-Origin = "*"
+Access-Control-Allow-Methods = "GET, POST, OPTIONS"
+Access-Control-Allow-Headers = "Content-Type, Authorization"
+
+[[headers]]
+for = "/api/health-check/info"
+
+[headers.values]
+Cache-Control = "public, max-age=300"
+
+[[headers]]
+for = "/api/health-check/status"
+
+[headers.values]
+Cache-Control = "no-cache, no-store, must-revalidate"
+
+[[headers]]
+for = "/*"
+
+[headers.values]
+X-Frame-Options = "DENY"
+X-Content-Type-Options = "nosniff"
+X-XSS-Protection = "1; mode=block"
+Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
+Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co https://api.prembly.com;"
+
+[[headers]]
+for = "/static/*"
+
+[headers.values]
+Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+for = "*.js"
+
+[headers.values]
+Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+for = "*.css"
+
+[headers.values]
+Cache-Control = "public, max-age=31536000, immutable"
+
+[[redirects]]
+from = "/verification/*"
+to = "/api/prembly-verification"
+status = 200.0
+force = true
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/health/*"
+to = "/api/health-check/:splat"
+status = 200.0
+force = true
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/lb/*"
+to = "/api/load-balancer/:splat"
+status = 200.0
+force = true
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/api/verify"
+to = "/api/load-balancer/verify"
+status = 200.0
+force = true
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/*"
+to = "/404.html"
+status = 404.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]

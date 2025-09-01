@@ -13,6 +13,7 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
+    "@seftechub/ui-kit": "workspace:*",
     "@hookform/resolvers": "^3.3.2",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-alert-dialog": "^1.0.5",
