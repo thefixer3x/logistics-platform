@@ -30,6 +30,15 @@ export function FlutterwaveButton({
 }: FlutterwaveButtonProps) {
   const [isLoading, setIsLoading] = useState(false)
   const flutterwaveService = new FlutterwaveService(process.env.NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY || '')
+  const isTrustedRedirectUrl = (url: string) => {
+    try {
+      const parsed = new URL(url)
+      const allowedHosts = ['checkout.flutterwave.com', 'flutterwave.com']
+      return allowedHosts.some(host => parsed.hostname === host || parsed.hostname.endsWith(`.${host}`))
+    } catch {
+      return false
+    }
+  }
 
   const handlePayment = async () => {
     setIsLoading(true)
@@ -55,7 +64,11 @@ export function FlutterwaveButton({
 
       if (data.status === 'success') {
         // Redirect to Flutterwave checkout page
-        window.location.href = data.data.link
+        const redirectUrl = data?.data?.link
+        if (!redirectUrl || !isTrustedRedirectUrl(redirectUrl)) {
+          throw new Error('Received untrusted redirect URL from payment initializer')
+        }
+        window.location.assign(redirectUrl)
       } else {
         throw new Error(data.message || 'Failed to initialize payment')
       }
