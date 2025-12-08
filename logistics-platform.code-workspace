@@ -25,7 +25,14 @@
       "**/bun.lockb": true
     },
     "stripe.enableCodebaseIndexing": true,
-    "stripe.enableIntegrationGuides": true
+    "stripe.enableIntegrationGuides": true,
+    "terminal.integrated.allowMnemonics": true,
+    "terminal.integrated.copyOnSelection": true,
+    "terminal.integrated.cursorBlinking": true,
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    "terminal.integrated.enableImages": true,
+    "terminal.integrated.enableVisualBell": true,
+    "debug.terminal.clearBeforeReusing": true
   },
   "extensions": {
     "recommendations": [
