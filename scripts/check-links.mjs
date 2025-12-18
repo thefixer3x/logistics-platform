@@ -15,17 +15,17 @@ async function main() {
   // 1. Load routes and allow-list
   const routes = JSON.parse(await fs.readFile(ROUTES_FILE, 'utf-8'));
   const allowList = JSON.parse(await fs.readFile(ALLOW_LIST_FILE, 'utf-8'));
-  const appRoutes = new Set(Object.keys(routes));
+  const appRoutes = new Set(routes.map(r => r.path));
   const externalAllowSet = new Set(allowList.external);
 
-  const pageRoutes = Object.entries(routes).filter(([, info]) => info.type === 'page');
+  const pageRoutes = routes.filter(info => info.type === 'page');
   const brokenLinks = [];
   let crawlErrors = 0;
 
   console.log(`Found ${pageRoutes.length} page routes to crawl.`);
 
   // 2. Crawl each page route
-  for (const [route] of pageRoutes) {
+  for (const { path: route } of pageRoutes) {
     const url = `${BASE_URL}${route}`;
     try {
       const response = await fetch(url);
