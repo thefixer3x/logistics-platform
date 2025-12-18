@@ -3,9 +3,14 @@ import fs from 'fs/promises';
 import path from 'path';
 
 // This would be your production URL
-const BASE_URL = process.env.PRODUCTION_URL || 'https://your-production-app.com';
+// This would be your production URL
 
 async function main() {
+  const BASE_URL = process.env.PRODUCTION_URL;
+  if (!BASE_URL) {
+    console.error('Error: PRODUCTION_URL environment variable is not set.');
+    process.exit(1);
+  }
   console.log(`Starting production link monitoring for ${BASE_URL}...`);
 
   const brokenLinks = [];
