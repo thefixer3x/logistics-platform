@@ -16,10 +16,10 @@ async function main() {
     const xmlData = await fs.readFile(jestReportPath, 'utf-8');
     const parser = new XMLParser();
     const report = parser.parse(xmlData);
-    const testsuite = report.testsuites.testsuite;
-    const total = testsuite['@_tests'];
-    const failures = testsuite['@_failures'];
-    const skipped = testsuite['@_skipped'];
+    const testsuites = [].concat(report.testsuites.testsuite || []);
+    const total = testsuites.reduce((acc, ts) => acc + parseInt(ts['@_tests'] || 0), 0);
+    const failures = testsuites.reduce((acc, ts) => acc + parseInt(ts['@_failures'] || 0), 0);
+    const skipped = testsuites.reduce((acc, ts) => acc + parseInt(ts['@_skipped'] || 0), 0);
     const passed = total - failures - skipped;
     summary += `### API Contract Tests\n- **Result:** ${failures > 0 ? '❌ Failed' : '✅ Passed'}\n- **Summary:** ${passed}/${total} tests passed.\n\n`;
     if (failures > 0) overallStatus = '❌ Checks failed';
